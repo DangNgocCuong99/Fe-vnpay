@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import Render from './render'
 
 const VNPayPayment = () => {
   const [amount, setAmount] = useState(0); // Số tiền thanh toán
-
+  const [html, setHtml] = useState("");
   const handlePayment = async () => {
     try {
       // Gửi yêu cầu thanh toán đến server Node.js
@@ -18,6 +19,7 @@ const VNPayPayment = () => {
 
       // Khi nhận được dữ liệu từ server, chuyển hướng người dùng đến trang thanh toán VNPay
       window.location.href = data.payUrl;
+      setHtml(data.payUrl)
     } catch (error) {
       console.log(error);
     }
@@ -33,6 +35,7 @@ const VNPayPayment = () => {
       <h2>VNPay Payment</h2>
       <input type="number" value={amount} onChange={handleAmountChange} />
       <button onClick={handlePayment}>Pay with VNPay</button>
+      <Render html={html}/>
     </div>
   );
 };
