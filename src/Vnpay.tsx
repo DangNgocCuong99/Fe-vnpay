@@ -3,23 +3,21 @@ import Render from './render'
 
 const VNPayPayment = () => {
   const [amount, setAmount] = useState(0); // Số tiền thanh toán
-  const [html, setHtml] = useState("");
   const handlePayment = async () => {
     try {
       // Gửi yêu cầu thanh toán đến server Node.js
-      const response = await fetch('http://localhost:3000/', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+    //   const response = await fetch('http://localhost:3000/', {
+    //     method: 'GET',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
     
-      });
+    //   });
 
-      const data = await response.json();
+    //   const data = await response.json();
 
       // Khi nhận được dữ liệu từ server, chuyển hướng người dùng đến trang thanh toán VNPay
-      window.location.href = data.payUrl;
-      setHtml(data.payUrl)
+      window.location.href = "https://sandbox.vnpayment.vn/paymentv2/Transaction/PaymentMethod.html?token=498622783b5e4976b1f4ac22465b4fe3";
     } catch (error) {
       console.log(error);
     }
@@ -35,7 +33,6 @@ const VNPayPayment = () => {
       <h2>VNPay Payment</h2>
       <input type="number" value={amount} onChange={handleAmountChange} />
       <button onClick={handlePayment}>Pay with VNPay</button>
-      <Render html={html}/>
     </div>
   );
 };
